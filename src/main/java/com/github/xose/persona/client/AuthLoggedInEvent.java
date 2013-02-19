@@ -21,28 +21,28 @@ import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-class AuthFailureEvent extends Event<AuthFailureHandler> {
+class AuthLoggedInEvent extends Event<AuthLoggedInHandler> {
 
-	private static final Type<AuthFailureHandler> TYPE = new Type<AuthFailureHandler>();
+	private static final Type<AuthLoggedInHandler> TYPE = new Type<AuthLoggedInHandler>();
 
-	static final HandlerRegistration register(EventBus eventBus, AuthFailureHandler handler) {
+	static final HandlerRegistration register(EventBus eventBus, AuthLoggedInHandler handler) {
 		return eventBus.addHandler(TYPE, handler);
 	}
 
 	@Override
-	public Type<AuthFailureHandler> getAssociatedType() {
+	public Type<AuthLoggedInHandler> getAssociatedType() {
 		return TYPE;
 	}
 
-	private final String message;
+	private final String user;
 
-	public AuthFailureEvent(String message) {
-		this.message = Preconditions.checkNotNull(message);
+	AuthLoggedInEvent(String user) {
+		this.user = Preconditions.checkNotNull(user);
 	}
 
 	@Override
-	protected void dispatch(AuthFailureHandler handler) {
-		handler.onAuthFailure(message);
+	protected void dispatch(AuthLoggedInHandler handler) {
+		handler.onAuthLoggedIn(user);
 	}
 
 }

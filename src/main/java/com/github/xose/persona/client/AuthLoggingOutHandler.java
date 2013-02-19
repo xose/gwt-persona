@@ -16,6 +16,16 @@
 
 package com.github.xose.persona.client;
 
+/**
+ * Handler interface for authentication logging out events.
+ */
 public interface AuthLoggingOutHandler {
+
+	/**
+	 * Called when the user starts the logout process.
+	 * 
+	 * This handler can be used to perform actions while the user is still
+	 * logged in. Do not log the user out on the backend using this handler.
+	 */
 	void onAuthLoggingOut();
 }

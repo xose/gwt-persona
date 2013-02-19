@@ -16,26 +16,33 @@
 
 package com.github.xose.persona.client;
 
+import com.google.common.base.Preconditions;
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-class AuthVerifyingEvent extends Event<AuthVerifyingHandler> {
+class AuthErrorEvent extends Event<AuthErrorHandler> {
 
-	private static final Type<AuthVerifyingHandler> TYPE = new Type<AuthVerifyingHandler>();
+	private static final Type<AuthErrorHandler> TYPE = new Type<AuthErrorHandler>();
 
-	static final HandlerRegistration register(EventBus eventBus, AuthVerifyingHandler handler) {
+	static final HandlerRegistration register(EventBus eventBus, AuthErrorHandler handler) {
 		return eventBus.addHandler(TYPE, handler);
 	}
 
 	@Override
-	public Type<AuthVerifyingHandler> getAssociatedType() {
+	public Type<AuthErrorHandler> getAssociatedType() {
 		return TYPE;
 	}
 
+	private final String message;
+
+	AuthErrorEvent(String message) {
+		this.message = Preconditions.checkNotNull(message);
+	}
+
 	@Override
-	protected void dispatch(AuthVerifyingHandler handler) {
-		handler.onAuthVerifying();
+	protected void dispatch(AuthErrorHandler handler) {
+		handler.onAuthError(message);
 	}
 
 }

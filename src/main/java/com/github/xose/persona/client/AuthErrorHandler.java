@@ -16,6 +16,18 @@
 
 package com.github.xose.persona.client;
 
-public interface AuthFailureHandler {
-	void onAuthFailure(String message);
+/**
+ * Handler interface for authentication error events.
+ */
+public interface AuthErrorHandler {
+
+	/**
+	 * Called when the login/logout procedure fails.
+	 * <p>
+	 * The current Persona status is not modified.
+	 * 
+	 * @param message
+	 *            the error message
+	 */
+	void onAuthError(String message);
 }

@@ -16,6 +16,13 @@
 
 package com.github.xose.persona.client;
 
+/**
+ * Handler interface for authentication logged out events.
+ */
 public interface AuthLoggedOutHandler {
+
+	/**
+	 * Called when the logout process has completed.
+	 */
 	void onAuthLoggedOut();
 }

@@ -16,15 +16,18 @@
 
 package com.github.xose.persona.client;
 
-/**
- * Handler interface for authentication cancelled events.
- */
-public interface AuthCancelledHandler {
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-	/**
-	 * Called when the user cancels a login attempt.
-	 * <p>
-	 * The current Persona status is not modified.
-	 */
-	void onAuthCancelled();
+class NullPersonaBackend implements PersonaBackend {
+
+	@Override
+	public void doLogin(final String assertion, final AsyncCallback<String> callback) {
+		callback.onFailure(new Exception("No backend"));
+	}
+
+	@Override
+	public void doLogout(final AsyncCallback<Void> callback) {
+		callback.onFailure(new Exception("No backend"));
+	}
+
 }

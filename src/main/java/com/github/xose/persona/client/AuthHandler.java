@@ -16,6 +16,11 @@
 
 package com.github.xose.persona.client;
 
-public interface AuthHandler extends AuthSuccessHandler, AuthFailureHandler, AuthLoggedOutHandler, AuthVerifyingHandler, AuthLoggingOutHandler, AuthCancelledHandler {
+/**
+ * Persona authentication handler interface.
+ * <p>
+ * This interface includes all available handlers.
+ */
+public interface AuthHandler extends AuthLoggedInHandler, AuthErrorHandler, AuthLoggedOutHandler, AuthLoggingInHandler, AuthLoggingOutHandler, AuthCancelledHandler {
 
 }

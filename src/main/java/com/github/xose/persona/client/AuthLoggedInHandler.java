@@ -16,6 +16,16 @@
 
 package com.github.xose.persona.client;
 
-public interface AuthSuccessHandler {
-	void onAuthSuccess(String user);
+/**
+ * Handler interface for authentication success events.
+ */
+public interface AuthLoggedInHandler {
+
+	/**
+	 * Called when a Persona login succeeds.
+	 * 
+	 * @param user
+	 *            the verified user
+	 */
+	void onAuthLoggedIn(String user);
 }

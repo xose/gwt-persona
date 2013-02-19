@@ -16,33 +16,26 @@
 
 package com.github.xose.persona.client;
 
-import com.google.common.base.Preconditions;
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-class AuthSuccessEvent extends Event<AuthSuccessHandler> {
+class AuthLoggingInEvent extends Event<AuthLoggingInHandler> {
 
-	private static final Type<AuthSuccessHandler> TYPE = new Type<AuthSuccessHandler>();
+	private static final Type<AuthLoggingInHandler> TYPE = new Type<AuthLoggingInHandler>();
 
-	static final HandlerRegistration register(EventBus eventBus, AuthSuccessHandler handler) {
+	static final HandlerRegistration register(EventBus eventBus, AuthLoggingInHandler handler) {
 		return eventBus.addHandler(TYPE, handler);
 	}
 
 	@Override
-	public Type<AuthSuccessHandler> getAssociatedType() {
+	public Type<AuthLoggingInHandler> getAssociatedType() {
 		return TYPE;
 	}
 
-	private final String user;
-
-	public AuthSuccessEvent(String user) {
-		this.user = Preconditions.checkNotNull(user);
-	}
-
 	@Override
-	protected void dispatch(AuthSuccessHandler handler) {
-		handler.onAuthSuccess(user);
+	protected void dispatch(AuthLoggingInHandler handler) {
+		handler.onAuthLoggingIn();
 	}
 
 }

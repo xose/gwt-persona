@@ -18,10 +18,48 @@ package com.github.xose.persona.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Represents a site-specific backend that will process Persona assertions.
+ * <p>
+ * An implementation of this interface must connect to a server backend to
+ * verify assertions and set up a session for the user.
+ * </p>
+ * This can be implemented, for example, with a redirect, XHR request, RPC call,
+ * WebSocket message, ...
+ */
 public interface PersonaBackend {
 
-	void doLogin(String assertion, String audience, AsyncCallback<String> callback);
+	/**
+	 * Called when an assertion is returned by Persona.
+	 * <p>
+	 * The backend must verify the assertion and call the appropriate callback:
+	 * <ul>
+	 * <li> {@link AsyncCallback#onSuccess} Call with the user email when the
+	 * assertion has been correctly verified and the user is logged in.
+	 * <li> {@link AsyncCallback#onFailure} Call when the assertion is invalid or
+	 * an error occurs.
+	 * </ul>
+	 * 
+	 * @param assertion
+	 *            the assertion that must be verified
+	 * @param callback
+	 *            the callback function
+	 */
+	void doLogin(String assertion, AsyncCallback<String> callback);
 
+	/**
+	 * Called when the user requests to log out of Persona.
+	 * <p>
+	 * The backend must close the session and call the appropriate callback:
+	 * <ul>
+	 * <li> {@link AsyncCallback#onSuccess} Call with a null parameter when the
+	 * user has been successfully logged out.
+	 * <li> {@link AsyncCallback#onFailure} Call when an error occurs.
+	 * </ul>
+	 * 
+	 * @param callback
+	 *            the callback function
+	 */
 	void doLogout(AsyncCallback<Void> callback);
 
 }

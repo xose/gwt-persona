@@ -16,6 +16,13 @@
 
 package com.github.xose.persona.client;
 
-public interface AuthVerifyingHandler {
-	void onAuthVerifying();
+/**
+ * Handler interface for authentication logging in events.
+ */
+public interface AuthLoggingInHandler {
+	
+	/**
+	 * Called when the user starts the login process.
+	 */
+	void onAuthLoggingIn();
 }
